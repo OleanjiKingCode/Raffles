@@ -1,0 +1,6 @@
+type RandomNumber @entity {
+  id: ID!
+  RandomnessValue: BigInt!
+  Result: BigInt!
+  Date: BigInt!
+}

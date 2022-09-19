@@ -1,0 +1,27 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Raffle
+    network: matic
+    source:
+      address: "0xB7185E8332fc2Ff1a02664312288E11c39C0dBd0"
+      abi: Raffle
+      startBlock: 19950785
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - RandomNumberReceived
+      abis:
+        - name: Raffle
+          file: ./abis/Raffle.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: RandomNumberReceived(bytes32,uint256,uint256)
+          handler: handleRandomNumberReceived
+      file: ./src/raffle.ts
